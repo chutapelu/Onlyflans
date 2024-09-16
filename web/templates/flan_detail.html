@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card p-4" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+        <!-- Información del Flan -->
+        <div class="text-center mb-4">
+            <h1 class="display-4" style="font-family: 'Arial', sans-serif; color: #2c3e50;">{{ flan.name }}</h1>
+            <p class="lead" style="font-size: 1.25rem; color: #34495e;">{{ flan.description }}</p>
+        </div>
+        
+        <!-- Reseñas -->
+        <div class="mb-4">
+            <h2 class="text-center" style="font-family: 'Arial', sans-serif; color: #2c3e50;">Reseñas</h2>
+            <ul class="list-unstyled">
+                {% for review in reviews %}
+                    <li class="mb-3">
+                        <div class="d-flex align-items-start mb-2">
+                            <strong class="mr-2">{{ review.user.username }}</strong>
+                            <span class="text-muted">{{ review.created_at }}</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="badge badge-primary mr-2">{{ review.rating }} estrellas</span>
+                        </div>
+                        <p style="font-size: 1rem; color: #7f8c8d;">{{ review.comment }}</p>
+                    </li>
+                {% empty %}
+                    <li class="text-center">No hay reseñas todavía.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Enlace para Agregar Reseña -->
+        <div class="text-center">
+            <a href="{% url 'add_review' flan.pk %}" class="btn btn-primary" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">Agregar reseña</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

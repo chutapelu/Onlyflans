@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="jumbotron p-4 rounded" style="background: linear-gradient(to right, #a4f1f1, #ffffff); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+        <h1 class="display-4" style="font-family: 'Arial', sans-serif; color: #2c3e50;">¡Bienvenido {{user.get_username}}!</h1>
+        <p class="lead" style="font-size: 1.25rem; color: #34495e;">Ricos flanes exclusivos para ti te esperan.</p>
+        <hr class="my-4" style="border-color: #ecf0f1;">
+        <p style="font-size: 1.1rem; color: #7f8c8d;">Explora nuestros flanes especialmente elegidos para ti.</p>
+        <a class="btn btn-primary btn-sm" href="/contacto" role="button" style="background-color: #3498db; border: none; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">Haz tu pedido</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        {% for flan in flanes_privados %}
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card" style="width: 15rem; margin-right: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+                <img src="{{ flan.image_url }}" class="card-img-top img-fluid" alt="{{ flan.name }}" style="object-fit: cover; height: 200px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                <div class="card-body text-center">
+                    <h5 class="card-title" style="font-family: 'Arial', sans-serif; color: #2c3e50;">{{ flan.name }}</h5>
+                    <p class="card-text" style="font-size: 12px; color: #7f8c8d;">{{ flan.description }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
